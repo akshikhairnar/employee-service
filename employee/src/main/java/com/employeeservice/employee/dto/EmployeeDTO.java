@@ -16,6 +16,6 @@ public class EmployeeDTO {
 
     private Long departmentId;
 
-    private String projects;
+   // private Long projectId;
 
 }

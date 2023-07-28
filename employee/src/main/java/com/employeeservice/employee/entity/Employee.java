@@ -15,7 +15,7 @@ import java.util.Set;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long empId;
 
     private String firstName;
@@ -25,8 +25,8 @@ public class Employee {
     @JsonIgnore
     private Long departmentId;
 
-    @JsonIgnore
-    private List<> projects;
+//    @JsonIgnore
+//    private Long projectId;
 
 
 }

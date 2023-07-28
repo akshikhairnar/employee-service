@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -27,12 +28,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee addEmployee(Employee employee) {
-        Employee existEmployee = getEmployee(employee.getEmpId());
-        if (existEmployee == null) {
-            return employeeRepository.save(employee);
-        } else {
-            throw new EmployeeAlreadyExistsException("Employee Already Exist With Id : " + existEmployee.getEmpId());
-        }
+
+        return employeeRepository.save(employee);
+//        Employee existEmployee = employeeRepository.findById(employee.getEmpId()).orElseThrow();
+//                //getEmployee(employee.getEmpId());
+//        if (employee == null) {
+//            return employeeRepository.save(employee);
+//        } else {
+//            throw new EmployeeAlreadyExistsException("Employee Already Exist With Id : " + existEmployee.getEmpId());
+//        }
     }
 
     @Override

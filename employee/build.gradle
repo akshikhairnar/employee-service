@@ -28,6 +28,8 @@ dependencies {
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'io.dapr:dapr-sdk:1.9.0'
+	implementation 'io.dapr:dapr-sdk-springboot:1.9.0'
 }
 
 tasks.named('test') {

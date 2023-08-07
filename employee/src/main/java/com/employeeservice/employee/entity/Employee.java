@@ -25,8 +25,7 @@ public class Employee {
     @JsonIgnore
     private Long departmentId;
 
-//    @JsonIgnore
-//    private Long projectId;
+ //   private Long projectId;
 
 
 }

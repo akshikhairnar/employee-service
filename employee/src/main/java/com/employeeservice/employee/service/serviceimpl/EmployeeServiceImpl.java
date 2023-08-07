@@ -1,8 +1,8 @@
 package com.employeeservice.employee.service.serviceimpl;
 
 import com.employeeservice.employee.entity.Employee;
-import com.employeeservice.employee.exceptions.employeeexceptions.EmployeeAlreadyExistsException;
-import com.employeeservice.employee.exceptions.employeeexceptions.NoSuchEmployeeExistsException;
+import com.employeeservice.employee.entity.EmployeeProject;
+import com.employeeservice.employee.repository.EmployeeProjectRepository;
 import com.employeeservice.employee.repository.EmployeeRepository;
 import com.employeeservice.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,33 +16,31 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Autowired
+    private EmployeeProjectRepository employeeProjectRepository;
+
     @Override
     public List<Employee> getAllEmployee() {
         return employeeRepository.findAll();
     }
 
     @Override
-    public Employee getEmployee(Long id) {
-        return employeeRepository.findById(id).orElseThrow(() -> new NoSuchEmployeeExistsException("No Employee Exist With Id : " + id));
+    public Optional<Employee> getEmployee(Long id) {
+        return employeeRepository.findById(id);
+                //.orElseThrow(() -> new NoSuchEmployeeExistsException("No Employee Exist With Id : " + id));
     }
 
     @Override
     public Employee addEmployee(Employee employee) {
 
         return employeeRepository.save(employee);
-//        Employee existEmployee = employeeRepository.findById(employee.getEmpId()).orElseThrow();
-//                //getEmployee(employee.getEmpId());
-//        if (employee == null) {
-//            return employeeRepository.save(employee);
-//        } else {
-//            throw new EmployeeAlreadyExistsException("Employee Already Exist With Id : " + existEmployee.getEmpId());
-//        }
+
     }
 
     @Override
     public Employee updateEmployee(Employee employee, Long id) {
-        Employee existedEmployee = getEmployee(id);
-        if (existedEmployee != null) {
+        Optional<Employee> existedEmployee = getEmployee(id);
+        if (!existedEmployee.isEmpty()) {
             return employeeRepository.save(employee);
         }
         return null;
@@ -51,6 +49,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteAllEmployees() {
         employeeRepository.deleteAll();
+    }
+
+    @Override
+    public EmployeeProject addEmployeeProject(EmployeeProject employeeProject) {
+        return employeeProjectRepository.save(employeeProject);
     }
 
 
